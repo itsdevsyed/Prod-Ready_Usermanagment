@@ -8,7 +8,7 @@ public class UsermanagmentApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UsermanagmentApplication.class, args);
-		System.out.println("Database is ruuning fine and dataa based is runningasdfasdfasdf fine for now ");
+		System.out.println(" databased is working for now ");
 	}
 
 }
