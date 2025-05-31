@@ -10,9 +10,6 @@ public class UserRequest {
     private String username;
 
     @NotBlank
-    private String name;
-
-    @NotBlank
     private String email;
 
     private String phone;

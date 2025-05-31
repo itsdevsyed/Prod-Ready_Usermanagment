@@ -33,13 +33,13 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = User.builder()
-                .username(request.getUsername())
-                .phone(request.getPhone())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role("USER")
-                .enabled(true)
-                .createdAt(LocalDateTime.now())
-                .build();
+            .phone(request.getPhone())
+            .email(request.getEmail())
+            .password(passwordEncoder.encode(request.getPassword()))
+            .role("USER")
+            .enabled(true)
+            .createdAt(LocalDateTime.now())
+            .build();
 
         User savedUser = userRepository.save(user);
         return mapToUserResponse(savedUser);
