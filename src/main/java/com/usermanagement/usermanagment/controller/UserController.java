@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.usermanagement.usermanagment.dto.UserRequest;
+import com.usermanagement.usermanagment.dto.RegisterUserRequest;
 import com.usermanagement.usermanagment.dto.UserResponse;
 import com.usermanagement.usermanagment.service.UserService;
 
@@ -24,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody RegisterUserRequest request) {
         UserResponse response = userService.createUser(request);
         return ResponseEntity.ok(response);
     }
