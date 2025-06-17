@@ -10,6 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -17,8 +18,12 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "users", uniqueConstraints = {
     @UniqueConstraint(columnNames = "email" ),
     @UniqueConstraint(columnNames = "username")
@@ -28,13 +33,14 @@ import lombok.Builder;
     @Index(name = "idx_email", columnList = "email")
 })
 public class User{
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true, length = 40)
     private String username;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String fullName;
 
     @Column(nullable = false, unique = true, length = 100)
@@ -72,12 +78,12 @@ public class User{
     private UserStatus status = UserStatus.INACTIVE;
 
     @PrePersist
-    protected void oneCreate() {
+    protected void onCreate() {
         this.createdAt = Instant.now();
     }
 
     @PreUpdate
-    protected void onUpdate() {
+    protected void onUpdated() {
         this.updatedAt = Instant.now();
     }
 
@@ -125,7 +131,11 @@ public class User{
                 ", updateAt=" + updatedAt +
                 '}';
     }
+    public User() {
 
+        // Default constructor for JPA
+
+    }
 
 
 

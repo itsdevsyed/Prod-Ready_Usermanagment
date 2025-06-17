@@ -1,5 +1,7 @@
 package com.usermanagement.usermanagment.dto;
 
+import com.usermanagement.usermanagment.entity.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -16,8 +18,17 @@ public class UserResponse {
     private Boolean emailVerified;
     private Boolean phoneVerified;
 
-    public UserResponse() {
+    public UserResponse(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.fullName = user.getFullName();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.enabled = user.getEnabled();
+        this.emailVerified = user.getEmailVerified();
+        this.phoneVerified = user.getPhone() != null && !user.getPhone().isEmpty();
+
         // Default constructor
     }
-    
+
 }
