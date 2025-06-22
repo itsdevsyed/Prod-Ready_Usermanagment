@@ -1,9 +1,10 @@
 package com.usermanagement.usermanagment.entity;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Objects;
-
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,6 +21,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenerationTime;
 
 @Entity
 @Getter
@@ -35,6 +37,7 @@ import lombok.Setter;
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
     @Column(nullable = false, unique = true, length = 40)

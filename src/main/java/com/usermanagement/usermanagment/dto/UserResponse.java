@@ -9,6 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 
 public class UserResponse {
+    private String message = "User details fetched successfully";
     private Long id;
     private String username;
     private String fullName;

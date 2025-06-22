@@ -1,6 +1,7 @@
 package com.usermanagement.usermanagment.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class RegisterUserRequest {
@@ -20,15 +21,17 @@ public class RegisterUserRequest {
     @Size(max = 50, message = "Email must be less than 50 characters")
     private String email;
 
-    public String phone = "";
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^[0-9]{10,15}$", message = "Invalid phone number format")
+    public String phone ;
 
     public RegisterUserRequest() {}
-    public RegisterUserRequest(String username, String fullName, String password, String email) {
+    public RegisterUserRequest(String username, String fullName, String password, String email , String phone ) {
         this.username = username;
         this.fullName = fullName;
         this.password = password;
         this.email = email;
-        this.phone = "";
+        this.phone = phone;
     }
     public String getUsername() {
         return username;
