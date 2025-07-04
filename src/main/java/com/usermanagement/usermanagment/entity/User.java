@@ -22,6 +22,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.id.UUIDGenerator;
+import org.hibernate.validator.constraints.UUID;
 
 @Entity
 @Getter
@@ -36,9 +39,11 @@ import org.hibernate.annotations.GenerationTime;
 })
 public class User{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+
     @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+    private UUID id;
 
     @Column(nullable = false, unique = true, length = 40)
     private String username;
@@ -125,6 +130,7 @@ public class User{
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", fullName='" + fullName + '\'' +
+                ", password='[PROTECTED]'" +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", enabled=" + enabled +
