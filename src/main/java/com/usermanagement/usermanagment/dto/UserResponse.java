@@ -4,13 +4,14 @@ import com.usermanagement.usermanagment.entity.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.validator.constraints.UUID;
 
 @Data
 @AllArgsConstructor
 
 public class UserResponse {
     private String message = "User details fetched successfully";
-    private Long id;
+    private UUID id;
     private String username;
     private String fullName;
     private String email;
