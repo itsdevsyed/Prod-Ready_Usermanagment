@@ -27,13 +27,5 @@ public class ApiResponse<T> {
         this.timestamp = LocalDateTime.now().toString();
         this.path = path;
     }
-
-
-    public  ApiResponse(HttpStatus httpStatus, String message, String path){
-        this.status = httpStatus.value();
-        this.message = message;
-        this.data = data;
-        this.timestamp = LocalDateTime.now().toString();
-        this.path = path;
-    }
+    
 }

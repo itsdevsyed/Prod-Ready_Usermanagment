@@ -2,46 +2,33 @@ package com.usermanagement.usermanagment.entity;
 
 import java.time.Instant;
 import java.util.Objects;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import java.util.UUID;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.id.UUIDGenerator;
-import org.hibernate.validator.constraints.UUID;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "users", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "email" ),
-    @UniqueConstraint(columnNames = "username")
-}
-, indexes = {
-    @Index(name = "idx_username", columnList = "username"),
-    @Index(name = "idx_email", columnList = "email")
-})
-public class User{
+@Table(
+    name = "users",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "username")
+    },
+    indexes = {
+        @Index(name = "idx_username", columnList = "username"),
+        @Index(name = "idx_email", columnList = "email")
+    }
+)
+public class User {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
@@ -62,25 +49,23 @@ public class User{
     private String phone;
 
     @Column(nullable = false)
-    private Boolean  enabled = false;
+    private Boolean enabled = false;
 
-
-    @Column(name = "email_verified",nullable = false)
+    @Column(name = "email_verified", nullable = false)
     private Boolean emailVerified = false;
 
     @Column(name = "phone_verified", nullable = false)
     private Boolean phoneVerified = false;
 
-
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-
-    @Column(name = "update_at")
+    @Column(name = "updated_at")
     private Instant updatedAt;
 
     @Column(nullable = false)
     private Boolean isDeleted = false;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserStatus status = UserStatus.INACTIVE;
@@ -95,36 +80,37 @@ public class User{
         this.updatedAt = Instant.now();
     }
 
-
     @Builder
-    public User(String username, String fullName, String email, String password, String phone){
+    public User(String username, String fullName, String email, String password, String phone) {
         this.username = username;
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.phone = phone;
     }
+
     public enum UserStatus {
         ACTIVE, INACTIVE, BANNED
     }
 
-
+    public User() {
+        // Default constructor for JPA
+    }
 
     @Override
-    public boolean equals(Object o ) {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if(!(o instanceof User)) return false;
-        User user = (User)o;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
         return id != null && id.equals(user.id);
     }
 
     @Override
-    public  int hashCode(){
-          return Objects.hash(id);
-
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
-        @Override
+    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
@@ -137,15 +123,7 @@ public class User{
                 ", emailVerified=" + emailVerified +
                 ", phoneVerified=" + phoneVerified +
                 ", createdAt=" + createdAt +
-                ", updateAt=" + updatedAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
-    public User() {
-
-        // Default constructor for JPA
-
-    }
-
-
-
 }

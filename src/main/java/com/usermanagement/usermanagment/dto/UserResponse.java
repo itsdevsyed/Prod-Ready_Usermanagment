@@ -1,14 +1,11 @@
 package com.usermanagement.usermanagment.dto;
 
 import com.usermanagement.usermanagment.entity.User;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.validator.constraints.UUID;
+
+import java.util.UUID;
 
 @Data
-@AllArgsConstructor
-
 public class UserResponse {
     private String message = "User details fetched successfully";
     private UUID id;
@@ -28,9 +25,6 @@ public class UserResponse {
         this.phone = user.getPhone();
         this.enabled = user.getEnabled();
         this.emailVerified = user.getEmailVerified();
-        this.phoneVerified = user.getPhone() != null && !user.getPhone().isEmpty();
-
-        // Default constructor
+        this.phoneVerified = user.getPhoneVerified();
     }
-
 }
