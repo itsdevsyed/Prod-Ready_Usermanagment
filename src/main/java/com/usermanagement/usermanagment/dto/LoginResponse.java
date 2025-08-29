@@ -4,16 +4,14 @@ public class LoginResponse {
     private String username;
     private String email;
     private String fullName;
-    private String token; // e.g. JWT if you add authentication later
 
     public LoginResponse() {
     }
 
-    public LoginResponse(String username, String email, String fullName, String token) {
+    public LoginResponse(String username, String email, String fullName) {
         this.username = username;
         this.email = email;
         this.fullName = fullName;
-        this.token = token;
     }
 
     public String getUsername() {
@@ -40,11 +38,7 @@ public class LoginResponse {
         this.fullName = fullName;
     }
 
-    public String getToken() {
-        return token;
-    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+
+
 }

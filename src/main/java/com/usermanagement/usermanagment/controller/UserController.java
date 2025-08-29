@@ -43,13 +43,10 @@ public class UserController {
         try {
             User user = userService.login(request.getEmail(), request.getPassword());
 
-            String token = "dummy-token"; // Replace with JWT if implemented
-
             return ResponseEntity.ok(new LoginResponse(
                     user.getUsername(),
                     user.getEmail(),
-                    user.getFullName(),
-                    token
+                    user.getFullName()
             ));
         } catch (InvalidCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
