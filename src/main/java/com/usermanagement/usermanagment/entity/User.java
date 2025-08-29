@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,6 +41,8 @@ public class User {
     private String fullName;
 
     @Column(nullable = false, unique = true, length = 100)
+    @Email(message = "Invalid Email format")
+    @NotBlank(message = "Email is required")
     private String email;
 
     @Column(nullable = false, length = 100)
